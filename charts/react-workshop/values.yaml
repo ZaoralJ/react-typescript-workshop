@@ -1,0 +1,18 @@
+replicaCount: 1
+
+image:
+  repository: #{DOCKER_REPO}#
+  tag: latest
+  pullPolicy: IfNotPresent
+
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: example.com
+      paths: ["/path"]      
+  tls:
+    - secretName: service-tls
+      hosts:
+        - example.com
